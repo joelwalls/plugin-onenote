@@ -1,0 +1,87 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License. -->
+<!-- This file shows how to design a first-run page that provides a welcome screen to the user about the features of the add-in. -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contoso Task Pane Add-in</title>
+
+    <!-- Office JavaScript API -->
+
+    <!-- For more information on Office UI Fabric, visit https://developer.microsoft.com/fabric. -->
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css"/>
+
+    <!-- Template styles -->
+    <link href="taskpane.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body class="ms-font-m ms-welcome ms-Fabric">
+        <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                            <form>
+                                <div class="form-group">
+                                    <label for="formula_weight">Formula weight</label>
+                                    <div class="form-row">
+                                        <div class="col-xs-10">
+                                            <input type="number" class="form-control" id="formula_weight" placeholder="0">
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <select class="form-control" name="" id="">
+                                                <option value="1">g/mol</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group">
+                                    <label for="desired_final_volume">Desired final volume</label>
+                                    <div class="form-row">
+                                        <div class="col-xs-10">
+                                                <input type="number" class="form-control" id="desired_final_volume" placeholder="0">
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <select class="form-control" name="" id="desired_final_volume_um">
+                                                <option value="1">L</option>
+                                                <option value="0.001">mL</option>
+                                                <option value="0.000001">uL</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group">
+                                    <label for="desired_concentration">Desired concentration</label>
+                                    <div class="form-row">
+                                        <div class="col-xs-10">
+                                            <input type="number" class="form-control" id="desired_concentration" placeholder="0">
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <select class="form-control" name="" id="desired_concentration_um">
+                                                    <option value="1">M</option>
+                                                    <option value="0.001">mM</option>
+                                                    <option value="0.000001">uM</option>
+                                                    <option value="0.000000001">nM</option>
+                                                    <option value="0.000000000001">pM</option>
+                                                    <option value="0.000000000000001">fM</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                
+                                <button type="submit" class="btn btn-primary">Calculate</button>
+                                <h2 id="result"></h2>
+                            </form>
+                    </div>
+                </div>
+            </div>
+</body>
+
+</html>

@@ -1,0 +1,237 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BLAST</title>
+    
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  </head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                
+            <h2>BLAST Lookup</h2>
+            
+                <div class="form-group">
+                    <label for="formula_weight">Sequence</label>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <textarea class="form-control" name="sequence" id="sequence" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="lookup" type="button" class="btn btn-primary">Look through notes</button>
+
+                <div id="result" class="mt-4"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/html2canvas.js"></script>
+  <script src="https://sing-group.org/blasterjs/js/blaster.min.js"></script>
+<script>
+
+    var html = '';
+
+    function get2() {
+        OneNote.run(function (context) {
+
+            // Get the pages in the current section.
+            var pages = context.application.getActiveSection().pages;
+
+            // Queue a command to load the id and title for each page.            
+            pages.load('id,title');
+
+            // Run the queued commands, and return a promise to indicate task completion.
+            return context.sync()
+            .then(function () {
+
+                // Display the properties.
+                $.each(pages.items, function(index, page) {
+                    // setTimeout(getPagesInSection(index), index * 1000 + 10000);
+                    getPagesInSection(index);
+                });
+            });
+        })
+        .catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+    function getPagesInSection(i) {
+
+      OneNote.run(function (context) {
+        
+        // Get the pages in the current section.
+        var pages = context.application.getActiveSection().pages;
+                
+        // Queue a command to load the pages. 
+        // For best performance, request specific properties.           
+        pages.load('id, title');
+                
+        // Run the queued commands, and return a promise to indicate task completion.
+        return context.sync()
+            .then(function () {
+                        
+                // This example loads the first page in the section.
+                console.log(i);
+                
+                var page = pages.items[i];
+
+                context.application.navigateToPage(pages.items[i]);
+
+                // Get the collection of pageContent items from the page.
+        var pageContents = context.application.getActivePage().contents;
+
+        // Get the first PageContent on the page, and then get its outline's paragraphs.
+        var outlinePageContents = [];
+        var paragraphs = [];
+        var richTextParagraphs = [];
+        var dbs = '';
+        // Queue a command to load the id and type of each page content in the outline.
+        pageContents.load("id,type");
+
+        // Run the queued commands, and return a promise to indicate task completion.
+        return context.sync()
+            .then(function () {
+                // Load all page contents of type Outline
+                $.each(pageContents.items, function(index, pageContent) {
+                    if(pageContent.type == 'Outline')
+                    {
+                        pageContent.load('outline,outline/paragraphs,outline/paragraphs/type');
+                        outlinePageContents.push(pageContent);
+                    }
+                });
+                return context.sync();
+            })
+            .then(function () {
+                // Load all rich text paragraphs across outlines
+                $.each(outlinePageContents, function(index, outlinePageContent) {
+                    var outline = outlinePageContent.outline;
+                    paragraphs = paragraphs.concat(outline.paragraphs.items);
+                });
+                $.each(paragraphs, function(index, paragraph) {
+                    if(paragraph.type == 'RichText')
+                    {
+                        richTextParagraphs.push(paragraph);
+                        paragraph.load("id,richText/text");
+                    }
+                });
+                return context.sync();
+            })
+            .then(function () {
+                // Display all rich text paragraphs to the console
+                $.each(richTextParagraphs, function(index, richTextParagraph) {
+                    var richText = richTextParagraph.richText;
+                    // console.log(richText.text);
+                    dbs += richText.text + '\n';
+                });
+
+                return context.sync();
+            })
+            .then(function() {
+                
+                $.post('https://fcii.ute.edu.ec/blast/public/api',{
+                        db : dbs,
+                        sequence : $('#sequence').val() 
+                }, function(data) {
+                  
+                    // $('#result').html(context.application.getActivePage().name);
+
+                    var parser = new DOMParser();
+                    var xmlDoc = parser.parseFromString(data.response, "text/xml");
+
+                    var hits = xmlDoc.getElementsByTagName('Hit');
+
+                    html = '<div class="card mb-4">';
+                    html += '<div class="card-header">'
+                    html += page.title;
+                    html += '</div>';
+                    html += '<div class="card-body">';
+
+                    for (let index = 0; index < hits.length; index++) {
+                      const element = hits[index];
+                      var hsp = element.getElementsByTagName('Hsp');
+
+                      html += '<p><strong>' + element.getElementsByTagName('Hit_def')[0].innerHTML + '</strong></p>';
+                      for (let index2 = 0; index2 < hsp.length; index2++) {
+                        const element = hsp[index2];
+                        
+                        html += '<p>Score: ' + element.getElementsByTagName('Hsp_bit-score')[0].innerHTML + '</p>';
+
+                        var qseq = element.getElementsByTagName('Hsp_qseq')[0].innerHTML;
+                        var hseq = element.getElementsByTagName('Hsp_hseq')[0].innerHTML;
+                        var mseq = element.getElementsByTagName('Hsp_midline')[0].innerHTML;
+
+                        html += '<table class="table table-bordered table-condensed">';
+
+                        html += '<tr>';
+                        for (let indexq = 0; indexq < qseq.length; indexq++) {
+                          const element = qseq[indexq];
+                          html += '<td>' + element + '</td>';
+                        }
+                        html += '</tr>';
+
+                        html += '<tr>';
+                        for (let indexh = 0; indexh < hseq.length; indexh++) {
+                          const element = hseq[indexh];
+                          html += '<td>' + element + '</td>';
+                        }
+                        html += '</tr>';
+
+                        html += '<tr>';
+                        for (let indexm = 0; indexm < mseq.length; indexm++) {
+                          const element = mseq[indexm];
+                          html += '<td>' + element + '</td>';
+                        }
+                        html += '</tr>';
+
+                        html += '</table>';
+                        
+                      }
+                    }
+                    html += "</div>";
+                    html += "</div>";
+
+                    $('#result').append(html);
+                    
+                });
+            });
+                        
+                // Run the queued command.
+                return context.sync();
+            });
+        })
+        .catch(function(error) {
+            console.log("Error: " + error);
+            if (error instanceof OfficeExtension.Error) {
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
+
+
+    $('#lookup').click(function(e) {
+      $('#result').html("");
+
+        Office.onReady(function(f) {
+            get2();
+        });
+        
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
+  <Id>81f8e40e-6a9c-4a07-8d79-0605ce3ba778</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Universidad UTE</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Science"/>
+  <Description DefaultValue="Bioinformatics suite."/>
+  <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+  <SupportUrl DefaultValue="https://www.contoso.com/help"/>
+  <AppDomains>
+    <AppDomain>ute.edu.ec</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Notebook"/>
+  </Hosts>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://localhost:3000/mass_molarity.html"/>
+  </DefaultSettings>
+  <Permissions>ReadWriteDocument</Permissions>
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Hosts>
+      <Host xsi:type="Notebook">
+        <DesktopFormFactor>
+          <GetStarted>
+            <Title resid="GetStarted.Title"/>
+            <Description resid="GetStarted.Description"/>
+            <LearnMoreUrl resid="GetStarted.LearnMoreUrl"/>
+          </GetStarted>
+          <FunctionFile resid="Commands.Url"/>
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">            
+            <CustomTab id="ScienceTab">
+              <Group id="CommandsGroup">
+                <Label resid="CommandsGroup.Label"/>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16"/>
+                  <bt:Image size="32" resid="Icon.32x32"/>
+                  <bt:Image size="80" resid="Icon.80x80"/>
+                </Icon>
+                <Control xsi:type="Button" id="TaskpaneButton">
+                  <Label resid="TaskpaneButton.Label"/>
+                  <Supertip>
+                    <Title resid="TaskpaneButton.Label"/>
+                    <Description resid="TaskpaneButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="MassMolarity.16x16"/>
+                    <bt:Image size="32" resid="MassMolarity.32x32"/>
+                    <bt:Image size="80" resid="MassMolarity.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>ButtonId1</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="TaskpaneButton2">
+                  <Label resid="SolutionDilutionButton.Label"/>
+                  <Supertip>
+                    <Title resid="SolutionDilutionButton.Label"/>
+                    <Description resid="SolutionDilutionButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="SolutionDilution.16x16"/>
+                    <bt:Image size="32" resid="SolutionDilution.32x32"/>
+                    <bt:Image size="80" resid="SolutionDilution.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>ButtonId2</TaskpaneId>
+                    <SourceLocation resid="SolutionDilution.Url"/>
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="TaskpaneButton2">
+                  <Label resid="BlastButton.Label"/>
+                  <Supertip>
+                    <Title resid="BlastButton.Label"/>
+                    <Description resid="BlastButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="SolutionDilution.16x16"/>
+                    <bt:Image size="32" resid="SolutionDilution.32x32"/>
+                    <bt:Image size="80" resid="SolutionDilution.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>ButtonId10</TaskpaneId>
+                    <SourceLocation resid="Blast.Url"/>
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Menu" id="TaskpaneButton3">
+                  <Label resid="SequenceAnalysis.Label"/>
+                  <Supertip>
+                    <Title resid="SequenceAnalysis.Label"/>
+                    <Description resid="SolutionDilutionButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="SequenceAnalysis.16x16"/>
+                    <bt:Image size="32" resid="SequenceAnalysis.32x32"/>
+                    <bt:Image size="80" resid="SequenceAnalysis.80x80"/>
+                  </Icon>
+                  <Items>
+                  <Item id="CombineFasta">
+                       <Label resid="CombineFastaButton.Label"/>
+                        <Supertip>
+                          <Title resid="CombineFastaButton.Label"/>
+                          <Description resid="SolutionDilutionButton.Tooltip"/>
+                        </Supertip>
+                        <Icon>
+                          <bt:Image size="16" resid="SequenceAnalysis.16x16"/>
+                          <bt:Image size="32" resid="SequenceAnalysis.32x32"/>
+                          <bt:Image size="80" resid="SequenceAnalysis.80x80"/>
+                        </Icon>
+                        <Action xsi:type="ShowTaskpane">
+                          <TaskpaneId>ButtonId4</TaskpaneId>
+                          <SourceLocation resid="CombineFasta.Url"/>
+                        </Action>
+                    </Item>
+
+                    <Item id="PcrPrimerStats">
+                       <Label resid="PcrPrimerStatsButton.Label"/>
+                        <Supertip>
+                          <Title resid="PcrPrimerStatsButton.Label"/>
+                          <Description resid="SolutionDilutionButton.Tooltip"/>
+                        </Supertip>
+                        <Icon>
+                          <bt:Image size="16" resid="SequenceAnalysis.16x16"/>
+                          <bt:Image size="32" resid="SequenceAnalysis.32x32"/>
+                          <bt:Image size="80" resid="SequenceAnalysis.80x80"/>
+                        </Icon>
+                        <Action xsi:type="ShowTaskpane">
+                          <TaskpaneId>ButtonId3</TaskpaneId>
+                          <SourceLocation resid="PcrPrimerStats.Url"/>
+                        </Action>
+                    </Item>
+
+                    <Item id="DnaStats">
+                       <Label resid="DnaStatsButton.Label"/>
+                        <Supertip>
+                          <Title resid="DnaStatsButton.Label"/>
+                          <Description resid="SolutionDilutionButton.Tooltip"/>
+                        </Supertip>
+                        <Icon>
+                          <bt:Image size="16" resid="SequenceAnalysis.16x16"/>
+                          <bt:Image size="32" resid="SequenceAnalysis.32x32"/>
+                          <bt:Image size="80" resid="SequenceAnalysis.80x80"/>
+                        </Icon>
+                        <Action xsi:type="ShowTaskpane">
+                          <TaskpaneId>ButtonId5</TaskpaneId>
+                          <SourceLocation resid="DnaStats.Url"/>
+                        </Action>
+                    </Item>
+
+                    <Item id="ProteinStats">
+                       <Label resid="ProteinStatsButton.Label"/>
+                        <Supertip>
+                          <Title resid="ProteinStatsButton.Label"/>
+                          <Description resid="SolutionDilutionButton.Tooltip"/>
+                        </Supertip>
+                        <Icon>
+                          <bt:Image size="16" resid="SequenceAnalysis.16x16"/>
+                          <bt:Image size="32" resid="SequenceAnalysis.32x32"/>
+                          <bt:Image size="80" resid="SequenceAnalysis.80x80"/>
+                        </Icon>
+                        <Action xsi:type="ShowTaskpane">
+                          <TaskpaneId>ButtonId6</TaskpaneId>
+                          <SourceLocation resid="ProteinStats.Url"/>
+                        </Action>
+                    </Item>
+
+                    <Item id="DnaPattern">
+                       <Label resid="DnaPatternButton.Label"/>
+                        <Supertip>
+                          <Title resid="DnaPatternButton.Label"/>
+                          <Description resid="SolutionDilutionButton.Tooltip"/>
+                        </Supertip>
+                        <Icon>
+                          <bt:Image size="16" resid="SequenceAnalysis.16x16"/>
+                          <bt:Image size="32" resid="SequenceAnalysis.32x32"/>
+                          <bt:Image size="80" resid="SequenceAnalysis.80x80"/>
+                        </Icon>
+                        <Action xsi:type="ShowTaskpane">
+                          <TaskpaneId>ButtonId7</TaskpaneId>
+                          <SourceLocation resid="DnaPattern.Url"/>
+                        </Action>
+                    </Item>
+
+                    <Item id="ProteinPattern">
+                       <Label resid="ProteinPatternButton.Label"/>
+                        <Supertip>
+                          <Title resid="ProteinPatternButton.Label"/>
+                          <Description resid="SolutionDilutionButton.Tooltip"/>
+                        </Supertip>
+                        <Icon>
+                          <bt:Image size="16" resid="SequenceAnalysis.16x16"/>
+                          <bt:Image size="32" resid="SequenceAnalysis.32x32"/>
+                          <bt:Image size="80" resid="SequenceAnalysis.80x80"/>
+                        </Icon>
+                        <Action xsi:type="ShowTaskpane">
+                          <TaskpaneId>ButtonId8</TaskpaneId>
+                          <SourceLocation resid="ProteinPattern.Url"/>
+                        </Action>
+                    </Item>
+
+                  </Items>
+                </Control>
+              </Group>
+              <Label resid="scienceTabLabel"/>
+            </CustomTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.16x16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://localhost:3000/assets/icon-32.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+        <bt:Image id="MassMolarity.16x16" DefaultValue="https://localhost:3000/assets/mass_molarity/icon-16.png"/>
+        <bt:Image id="MassMolarity.32x32" DefaultValue="https://localhost:3000/assets/mass_molarity/icon-32.png"/>
+        <bt:Image id="MassMolarity.80x80" DefaultValue="https://localhost:3000/assets/mass_molarity/icon-80.png"/>
+        <bt:Image id="SolutionDilution.16x16" DefaultValue="https://localhost:3000/assets/solution_dilution/icon-16.png"/>
+        <bt:Image id="SolutionDilution.32x32" DefaultValue="https://localhost:3000/assets/solution_dilution/icon-32.png"/>
+        <bt:Image id="SolutionDilution.80x80" DefaultValue="https://localhost:3000/assets/solution_dilution/icon-80.png"/>
+        <bt:Image id="SequenceAnalysis.16x16" DefaultValue="https://localhost:3000/assets/sequence_analysis/icon-16.png"/>
+        <bt:Image id="SequenceAnalysis.32x32" DefaultValue="https://localhost:3000/assets/sequence_analysis/icon-32.png"/>
+        <bt:Image id="SequenceAnalysis.80x80" DefaultValue="https://localhost:3000/assets/sequence_analysis/icon-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
+        <bt:Url id="Commands.Url" DefaultValue="https://localhost:3000/commands.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/mass_molarity.html"/>
+        <bt:Url id="SolutionDilution.Url" DefaultValue="https://localhost:3000/solution_dilution.html"/>
+        <bt:Url id="PcrPrimerStats.Url" DefaultValue="https://localhost:3000/pcr_primer_stats.html"/>
+        <bt:Url id="DnaStats.Url" DefaultValue="https://localhost:3000/dna_stats.html"/>
+        <bt:Url id="CombineFasta.Url" DefaultValue="https://localhost:3000/combine_fasta.html"/>
+        <bt:Url id="ProteinStats.Url" DefaultValue="https://localhost:3000/protein_stats.html"/>
+        <bt:Url id="DnaPattern.Url" DefaultValue="https://localhost:3000/dna_pattern_find.html"/>
+        <bt:Url id="ProteinPattern.Url" DefaultValue="https://localhost:3000/protein_pattern_find.html"/>
+        <bt:Url id="Blast.Url" DefaultValue="https://localhost:3000/blast.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="GetStarted.Title" DefaultValue="Get started with your sample add-in!"/>
+        <bt:String id="CommandsGroup.Label" DefaultValue="Commands Group"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Mass molarity"/>
+        <bt:String id="SolutionDilutionButton.Label" DefaultValue="Solution Dilution"/>
+        <bt:String id="BlastButton.Label" DefaultValue="Inner Blast"/>
+        <bt:String id="SequenceAnalysis.Label" DefaultValue="Sequence Analysis"/>
+        <bt:String id="PcrPrimerStatsButton.Label" DefaultValue="PCR Primer Stats"/>
+        <bt:String id="CombineFastaButton.Label" DefaultValue="Combine Fasta"/>
+        <bt:String id="DnaStatsButton.Label" DefaultValue="DNA Stats"/>
+        <bt:String id="ProteinStatsButton.Label" DefaultValue="Protein Stats"/>
+        <bt:String id="DnaPatternButton.Label" DefaultValue="DNA Pattern Find"/>
+        <bt:String id="ProteinPatternButton.Label" DefaultValue="Protein Pattern Find"/>
+        <bt:String id="scienceTabLabel" DefaultValue="Science"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="GetStarted.Description" DefaultValue="Your sample add-in loaded succesfully. Go to the HOME tab and click the 'Show Taskpane' button to get started."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane"/>
+        <bt:String id="SolutionDilutionButton.Tooltip" DefaultValue="Click to Show a Taskpane"/>
+        <bt:String id="BlastButton.Tooltip" DefaultValue="Performs BLAST algorithm within notes"/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>
